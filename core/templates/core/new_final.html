@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Winner Page</title>
+    <style>
+      /* Style for the winner section */
+      .winner-section {
+        text-align: center;
+        margin-top: 50px;
+      }
+      .winner-section h1 {
+        font-size: 50px;
+        color: #8d5a38;
+        margin-bottom: 20px;
+        animation: congratulation 2s ease-in-out infinite;
+      }
+      .winner-section p {
+        font-size: 30px;
+        color: #f7e5c5;
+        background-color: #8d5a38;
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 50px;
+      }
+
+      /* Style for the table */
+      table {
+        border-collapse: collapse;
+        margin-top: 50px;
+        width: 100%;
+      }
+      th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f7e5c5;
+        color: #8d5a38;
+      }
+
+      /* Congratulation animation */
+      @keyframes congratulation {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+/* Link styles */
+.link-primary {
+  display: inline-block;
+  background-color: #ffc600;
+  color: #fff;
+  font-size: 24px;
+  padding: 16px 32px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.link-primary:hover {
+  background-color: #fff;
+  color: #ffc600;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+    </style>
+  </head>
+  <body>
+    <!-- Winner section -->
+    <div class="winner-section">
+      <h1>Congratulations!</h1>
+      <p>The winner is {{ winner }}</p>
+    </div>
+
+    <!-- Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Words</th>
+          <th>Word Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in all_words %}
+      <tr>
+        <td>{{ item.stu_name }}</td>
+        <td>
+          <ul>
+            {% for word in item.rand_name %}
+            <li>{{ word.rand_name }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      <td>{{ item.word_count }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+<!-- Link -->
+<div style="text-align:center; margin-top: 50px;">
+  <a href="{% url 'delete_all' %}" class="link-primary">Play Again</a>
+</div>
+
+  </body>
+</html>

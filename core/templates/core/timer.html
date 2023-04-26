@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Timer</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+
+
+<form method="get" name="tex">
+    <input type="text" name="textt" value="tex">
+    <input type="submit" value="submit">
+</form>
+
+<h1>{{ student }}</h1>
+<h3>Time Remaining: <span id="time_remaining"></span> seconds</h3>
+<script>
+    // JavaScript code to update time remaining dynamically and reload page after time limit expires
+    $(document).ready(function() {
+        var end_time = {{ request.session.end_time }};
+        timerInterval = setInterval(function() {
+            var current_time = Math.round((new Date()).getTime() / 1000);
+            var time_remaining = Math.round(end_time - current_time, 0);
+            $('#time_remaining').text(time_remaining);
+
+
+            if (time_remaining <= 0) {
+                // Reload the page after time limit expires
+                {#location.reload();#}
+                clearInterval(timerInterval);
+
+                var oform = document.forms['tex'];
+                oform.submit();
+                alert("time up");
+
+
+            }
+        }, 1000);
+    });
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="{% url 'students' %}">
+    {% csrf_token %}
+{#    {{ forms }}#}
+    <label for="name">name</label>
+    <input type="text" name="name">
+    <input type="submit" value="submit">
+</form>
+
+{% for name in names %}
+    <ul>
+    <li>{{ name.student_name }}</li>
+        <a href="{% url "delete_name" id_name=name.id %}">delete</a>
+    </ul>
+{% endfor %}
+
+<a href="{% url "first" %}">pick a random name</a>
+</body>
+</html>

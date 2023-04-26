@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>Student Word List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Words</th>
+          <th>Word Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in all_words %}
+      <tr>
+        <td>{{ item.stu_name }}</td>
+        <td>
+          <ul>
+            {% for word in item.rand_name %}
+            <li>{{ word.rand_name }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      <td>{{ item.word_count }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+
+
+
+
+<h1>the winner is:</h1>
+<h2>{{ winner }}</h2>
+
+
+
+</body>
+</html>

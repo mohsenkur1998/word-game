@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Word Game</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+	<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+
+    <style>
+/* General styles */
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav li {
+  float: left;
+}
+
+nav li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #3e8e41;
+}
+
+main {
+  margin: 20px;
+}
+
+footer {
+  background-color: #555;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Form styles */
+form {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Input styles */
+form input[type="number"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+form button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+form button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Table styles */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+table th, table td {
+  text-align: left;
+  padding: 8px;
+}
+
+table th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+
+/* Icon styles */
+table td i {
+  margin-right: 10px;
+  color: #4CAF50;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+table td i.ion-trash-b {
+  color: #ff6666;
+}
+
+table td i.ion-edit {
+  color: #66b3ff;
+}
+
+table td i:hover {
+  color: #45a049;
+}
+
+.start-game {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.start-game a {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.start-game a:hover {
+  background-color: #45a049;
+}
+
+
+    </style>
+</head>
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</nav>
+		<h1>Word Game</h1>
+	</header>
+	<main>
+        <form method="post" action="{% url 'students' %}">
+        {% csrf_token %}
+
+        <label for="name">Enter the names(only English characters)</label>
+        <input type="text" name="name" id="name" required>
+        <button type="submit">Submit</button>
+        </form>
+		{% for name in names %}
+		<div class="results">
+			<table>
+				<tr>
+					<th>Names:</th>
+                    <th>Actions:</th>
+				</tr>
+				<tr>
+					<td>{{ name.student_name }}</td>
+                    <td>
+{#                      <a href="{% url 'edit_result' result.pk %}"><i class="fas fa-edit"></i></a>#}
+                      <a href="{% url "delete_name" id_name=name.id %}"><i class="ion-trash-b"></i></a>
+                    </td>
+				</tr>
+			</table>
+		</div>
+		{% endfor %}
+    <div class="start-game">
+  <a href="{% url "first" %}">Let's Begin The Game!</a>
+    </div>
+	</main>
+	<footer>
+		<p>&copy; 2023 My Word Game</p>
+	</footer>
+</body>
+</html>
